@@ -1,0 +1,44 @@
+*{
+	margin: 0px auto;
+	padding: 0px;
+	text-align: center;
+	font-family:  sans-serif;
+}
+body{
+	width: 100%;
+}
+#titulo{
+	font-size: 24px;
+	color: #848484;
+}
+.medicion{
+	margin-top: 10px;
+	display: inline-block;
+	width: 33%;
+	height: 89%;
+	vertical-align: top;
+	color: #5882FA;
+	font-size: 14px;
+	position: relative;
+}
+
+.barra{
+	width: 220px;
+	height: 400px;
+	background-color: #0174DF;
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -125px;
+	margin-top: -400px;
+}
+#luz  > div{
+	background-color: #FF0000;
+}
+#humedad > div{
+	background-color: #00FF00;
+}
+#dialogo{
+	font-size: 30px;
+	text-align: left;
+}

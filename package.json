@@ -1,0 +1,17 @@
+{
+  "name": "Proyecto-Instrumentacion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.1.0",
+    "mysql": "^2.8.0",
+    "socket.io": "^0.9.16"
+  },
+  "scripts" :{
+    "start" : "node app"
+  },
+  "devDependencies": {},
+  "author": "Juan Crisóstomo",
+  "license": "MIT"
+}
