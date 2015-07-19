@@ -1,4 +1,4 @@
-var socket = io.connect('http://189.134.49.180:3000');
+var socket = io.connect('http://localhost:3000');
 
 var votos = [];
 var colors = ["#FF0F00",
