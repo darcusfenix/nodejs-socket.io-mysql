@@ -33,7 +33,7 @@ db.connect(function(err) {
 
 io.sockets.on('connection', function(socket) {
 
-    console.log('Number of connections:' + connectionsArray.length);
+    //console.log('Number of connections:' + connectionsArray.length);
 
     if (!connectionsArray.length) {
         pollingLoop();
@@ -47,19 +47,18 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    console.log('A new socket is connected!');
+    //console.log('A new socket is connected!');
     connectionsArray.push(socket);
 
 
-    partidos = [];
+    
     var query = db.query('SELECT partido FROM registro group by partido');
+    partidos = [];
     query.on('error', function(err) {
             console.log(err);
         })
         .on('result', function(data) {
-
             partidos.push(data);
-            //socket.emit('partidos', data);
         })
         .on('end', function(data) {
         	socket.emit('partidos', partidos);

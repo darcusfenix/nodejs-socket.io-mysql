@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://189.134.53.12:3000');
 
 var votos = [];
 var colors = ["#FF0F00",
@@ -19,11 +19,71 @@ var colors = ["#FF0F00",
         "#333333",
         "#000000"];
 
+var registros = [
+	{
+		"partido" : "PRI",
+		"total": 0,
+		"color": colors[0]
+	},
+	{
+		"partido" : "PAN",
+		"total": 0,
+		"color": colors[1]
+	},
+	{
+		"partido" : "PRD",
+		"total": 0,
+		"color": colors[2]
+	},
+	{
+		"partido" : "P_T",
+		"total": 0,
+		"color": colors[3]
+	},
+	{
+		"partido" : "VDE",
+		"total": 0,
+		"color": colors[4]
+	},
+	{
+		"partido" : "MVC",
+		"total": 0,
+		"color": colors[5]
+	},
+	{
+		"partido" : "NVA",
+		"total": 0,
+		"color": colors[6]
+	},
+	{
+		"partido" : "MOR",
+		"total": 0,
+		"color": colors[7]
+	},
+	{
+		"partido" : "HUM",
+		"total": 0,
+		"color": colors[8]
+	},
+	{
+		"partido" : "ENC",
+		"total": 0,
+		"color": colors[9]
+	}
+];
+
 socket.on('connected', function() {
 
 });
 
 socket.on('partidos', function(data) {
+	if (data.length == 0){
+		$("#chartdiv").fadeOut(0);
+	}
+	else{
+		$("#chartdiv").fadeIn(0);
+	}
+	votos = [];
 	for (var i = 0; i < data.length; i++) {
 		var fila = {
 			"partido": "",
@@ -33,29 +93,40 @@ socket.on('partidos', function(data) {
 		fila.partido = data[i].partido;
 		votos.push(fila);
 	};
-
 	App();
 });
 
 
 socket.on('data', function(data) {
+	$("h2").html('Total de votos: <b>' + data.length + '</b>');
+	if (data.length == 0){
+		$("table").fadeOut(0);
+	}else{
+		$("table").fadeIn(0);
+
+	}
+	
+				
     $('#registros').html(" ");
+
     for (var j = 0; j < votos.length; j++) {
     	votos[j].total = 0;
 	};
-    for (var i = 0; i < data.length; i++) {
-        $('#registros').append('<tr><td>' + (i + 1) + '<td>' + data[i].celular + '</td><td>' + data[i].curp + '</td><td>' + data[i].partido + ' </td></tr>');
 
+	
+
+    for (var i = 0; i < data.length; i++) {
+    	
+
+        $('#registros').append('<tr><td>' + (i + 1) + '<td>' + data[i].celular + '</td><td>' + data[i].curp + '</td><td>' + data[i].partido + ' </td></tr>');
         for (var j = 0; j < votos.length; j++) {
 
 			if (votos[j].partido === data[i].partido) {
 	        	votos[j].total++;
 	        }
-		};
-   		
-        
-        
+		};    
     };
+    
     App();
 });
 
@@ -106,3 +177,4 @@ var App = function() {
         "dataProvider": votos
     });
 };
+$("table").fadeOut(0);
