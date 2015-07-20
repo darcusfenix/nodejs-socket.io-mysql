@@ -19,9 +19,9 @@ var partidos = [];
 
 var db = mysql.createConnection({
     host: '189.134.53.12',
-    user: 'root',
+    user: 'darcus',
     database: 'db_project',
-    password: '2706'
+    password: 'darcus'
 });
 
 db.connect(function(err) {

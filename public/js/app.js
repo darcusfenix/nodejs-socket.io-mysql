@@ -1,6 +1,6 @@
 var socket = io.connect('http://189.134.53.12:3000');
 
-var votos = [];
+
 var colors = ["#FF0F00",
         "#FF6600",
         "#FF9E01",
@@ -77,27 +77,14 @@ socket.on('connected', function() {
 });
 
 socket.on('partidos', function(data) {
-	if (data.length == 0){
-		$("#chartdiv").fadeOut(0);
-	}
-	else{
-		$("#chartdiv").fadeIn(0);
-	}
-	votos = [];
-	for (var i = 0; i < data.length; i++) {
-		var fila = {
-			"partido": "",
-			"total" : 0,
-			"color" : colors[i]
-		};
-		fila.partido = data[i].partido;
-		votos.push(fila);
-	};
+	
 	App();
+	
 });
 
 
 socket.on('data', function(data) {
+	
 	$("h2").html('Total de votos: <b>' + data.length + '</b>');
 	if (data.length == 0){
 		$("table").fadeOut(0);
@@ -105,29 +92,25 @@ socket.on('data', function(data) {
 		$("table").fadeIn(0);
 
 	}
-	
 				
     $('#registros').html(" ");
 
-    for (var j = 0; j < votos.length; j++) {
-    	votos[j].total = 0;
+    for (var j = 0; j < registros.length; j++) {
+    	registros[j].total = 0;
 	};
 
-	
-
     for (var i = 0; i < data.length; i++) {
-    	
-
+   	
         $('#registros').append('<tr><td>' + (i + 1) + '<td>' + data[i].celular + '</td><td>' + data[i].curp + '</td><td>' + data[i].partido + ' </td></tr>');
-        for (var j = 0; j < votos.length; j++) {
-
-			if (votos[j].partido === data[i].partido) {
-	        	votos[j].total++;
-	        }
+        for (var j = 0; j < registros.length; j++) {
+	        if (registros[j].partido == data[i].partido) {
+	        	registros[j].total++;
+	        	App();
+	        };
 		};    
     };
     
-    App();
+    
 });
 
 
@@ -172,9 +155,9 @@ var App = function() {
         "titles": [{
             "id": "Title-1",
             "size": 22,
-            "text": "PARTIDOS POLÍTICOS"
+            "text": "Elecciones Sistemas distribuidos @ 2015"
         }],
-        "dataProvider": votos
+        "dataProvider": registros
     });
 };
 $("table").fadeOut(0);
