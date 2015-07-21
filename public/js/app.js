@@ -1,4 +1,4 @@
-var socket = io.connect('http://189.134.53.12:3000');
+var socket = io.connect('http://192.168.43.106:3000');
 
 
 var colors = ["#FF0F00",
@@ -78,7 +78,7 @@ socket.on('connected', function() {
 
 socket.on('partidos', function(data) {
 	
-	App();
+	//App();
 	
 });
 
@@ -101,22 +101,25 @@ socket.on('data', function(data) {
 
     for (var i = 0; i < data.length; i++) {
    	
-        $('#registros').append('<tr><td>' + (i + 1) + '<td>' + data[i].celular + '</td><td>' + data[i].curp + '</td><td>' + data[i].partido + ' </td></tr>');
+        //$('#registros').append('<tr><td>' + (i + 1) + '<td>' + data[i].celular + '</td><td>' + data[i].curp + '</td><td>' + data[i].partido + ' </td></tr>');
         for (var j = 0; j < registros.length; j++) {
 	        if (registros[j].partido == data[i].partido) {
 	        	registros[j].total++;
-	        	App();
+	        	//App();
+	    		    	
 	        };
+	        
 		};    
+
     };
-    
+    chart.validateData();
     
 });
 
 
 
-var App = function() {
-    AmCharts.makeChart("chartdiv", {
+//var App = function() {
+    var chart = AmCharts.makeChart("chartdiv", {
         "type": "serial",
         "categoryField": "partido",
         "startDuration": 0,
@@ -159,5 +162,5 @@ var App = function() {
         }],
         "dataProvider": registros
     });
-};
+//};
 $("table").fadeOut(0);

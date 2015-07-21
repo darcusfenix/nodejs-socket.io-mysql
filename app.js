@@ -18,7 +18,7 @@ var registros = [];
 var partidos = [];
 
 var db = mysql.createConnection({
-    host: '189.134.53.12',
+    host: 'localhost', 
     user: 'darcus',
     database: 'db_project',
     password: 'darcus'
